@@ -8,19 +8,22 @@
 建议使用 composer 进行安装:
 
 ```
-composer require "JinZhiSu\ALiDaYuSms"
+composer require jinzhisu/a-lida-yu-sms dev-master
 ```
 
 ## 使用 ##
 
 ```
-$auth = new \JinZhiSu\ALiDaYuSms\Auth($ak, $sk);
-$requestParams = (new \JinZhiSu\ALiDaYuSms\RequestParams($auth))
-    ->setPhoneNumbers(13930733521)
-    ->setSignName('XXX')
-    ->setTemplateCode('XXX')
-    ->setTemplateParam('XXX')
-    ->setOutId('XXX');
-$result = (new \JinZhiSu\ALiDaYuSms\Request($requestParams->getFinalReuqestUrl(),
-    $requestPrams->getSign());
+requestPrams->getSign());
+$ak = 'LTAIjoHwX******';
+$sk = 'fsJeM1J2mnI************';
+$auth = new Auth($ak, $sk);
+$requestParams = new RequestParams($auth);
+$sign = $requestParams->setPhoneNumbers(13910733521)
+    ->setTemplateCode('SMS_148613598')
+    ->setTemplateParam(['content' => mt_rand(1000, 9999)])
+    ->setSignName('Test')
+    ->getSign();
+$result = (new Request)->send($requestParams->getFinalRequestUrl(), $sign);
+var_dump($result);
 ```
